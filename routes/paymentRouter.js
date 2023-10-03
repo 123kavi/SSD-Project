@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const paymentCtrl = require('../Controllers/paymentCtrl')
+const paymentCtrl = require('../controllers/paymentCtrl')
 const auth = require('../middleware/auth')
 const authAdmin = require('../middleware/authAdmin')
 

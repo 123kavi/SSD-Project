@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const GoogleUserSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -27,4 +27,4 @@ const GoogleUserSchema = new mongoose.Schema({
     timestamps: true
 })
 
-module.exports = mongoose.model('Users', GoogleUserSchema)
+module.exports = mongoose.model('Users', userSchema)

@@ -1,0 +1,1 @@
+{"level":"error","message":"Error in createCategory: Category validation failed: name: Path `name` is required."}
