@@ -3,6 +3,7 @@ import { Link ,useHistory} from 'react-router-dom';
 import axios from 'axios';
 import Header1 from '../../headers/Header1';
 import {showErrMsg, showSuccessMsg} from '../utils/notification/Notification'
+import DOMPurify from 'dompurify'; // Import DOMPurify
 import {dispatchLogin} from '../../redux/actions/authAction'
 import {useDispatch} from 'react-redux'
 const initialState = {
@@ -22,7 +23,7 @@ function Login() {
 
   const onChangeInput = (e) => {
     const { name, value } = e.target;
-    setUser({...user, [name]:value, err: '', success: ''})
+    setUser({...user, [name]: DOMPurify.sanitize(value), err: '', success: ''})
   };
 
   const loginSubmit = async (e) => {

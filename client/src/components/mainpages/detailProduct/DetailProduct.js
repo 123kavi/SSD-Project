@@ -2,7 +2,7 @@ import React, {useContext, useState, useEffect} from 'react'
 import {useParams, Link} from 'react-router-dom'
 import {GlobalState} from '../../../GlobalState'
 import ProductItem from '../utils/productItem/ProductItem'
-
+import DOMPurify from 'dompurify';
 
 function DetailProduct() {
     const params = useParams()
@@ -28,12 +28,12 @@ function DetailProduct() {
                 <img src={detailProduct.images.url} alt="" />
                 <div className="box-detail">
                     <div className="row">
-                        <h2>{detailProduct.title}</h2>
+                    <h2>{DOMPurify.sanitize(detailProduct.title)}</h2>
                         <h6>#id: {detailProduct.product_id}</h6>
                     </div>
                     <span>$ {detailProduct.price}</span>
-                    <p>{detailProduct.description}</p>
-                    <p>{detailProduct.content}</p>
+                    <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(detailProduct.description) }} />
+                    <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(detailProduct.content) }} />
                     <p>Sold: {detailProduct.sold}</p>
                     <Link to="/cart" className="cart"
                     onClick={() => addCart(detailProduct)}>

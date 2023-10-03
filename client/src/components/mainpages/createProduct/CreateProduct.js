@@ -3,6 +3,7 @@ import axios from 'axios'
 import {GlobalState} from '../../../GlobalState'
 import Loading from '../utils/loading/Loading'
 import {useHistory, useParams} from 'react-router-dom'
+import DOMPurify from 'dompurify';
 
 const initialState = {
     product_id: '',
@@ -146,7 +147,7 @@ function CreateProduct() {
                 <div className="row">
                     <label htmlFor="title">Title</label>
                     <input type="text" name="title" id="title" required
-                    value={product.title} onChange={handleChangeInput} />
+                    value={DOMPurify.sanitize(product.title)} onChange={handleChangeInput} />
                 </div>
 
                 <div className="row">
@@ -158,13 +159,13 @@ function CreateProduct() {
                 <div className="row">
                     <label htmlFor="description">Description</label>
                     <textarea type="text" name="description" id="description" required
-                    value={product.description} rows="5" onChange={handleChangeInput} />
+                    value={DOMPurify.sanitize(product.description)} rows="5" onChange={handleChangeInput} />
                 </div>
 
                 <div className="row">
                     <label htmlFor="content">Content</label>
                     <textarea type="text" name="content" id="content" required
-                    value={product.content} rows="7" onChange={handleChangeInput} />
+                    value={DOMPurify.sanitize(product.content)} rows="7" onChange={handleChangeInput} />
                 </div>
 
                 <div className="row">

@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import axios from 'axios'
 import {showErrMsg, showSuccessMsg} from '../utils/notification/Notification'
 import {isEmpty, isEmail, isLength, isMatch} from '../utils/validation/Validation'
+import DOMPurify from 'dompurify'; // Import DOMPurify
 const initialState = {
     name: '',
     email: '',
@@ -19,7 +20,7 @@ function Register() {
 
     const onChangeInput = e =>{
         const {name, value} = e.target
-        setUser({...user, [name]:value, err: '', success: ''})
+        setUser({...user, [name]:DOMPurify.sanitize(value), err: '', success: ''})
     }
 
     const registerSubmit = async e =>{

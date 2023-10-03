@@ -1,4 +1,9 @@
 const Products = require('../models/productModel')
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
+
+const window = new JSDOM('').window;
+const DOMPurify = createDOMPurify(window);
 
 // Filter, sorting and paginating
 
@@ -53,10 +58,19 @@ const productCtrl = {
 
             const products = await features.query
 
+            // Sanitize user-generated product data
+            const sanitizedProducts = products.map((product) => ({
+                title: DOMPurify.sanitize(product.title),
+                price: DOMPurify.sanitize(product.price),
+                description: DOMPurify.sanitize(product.description),
+                content: DOMPurify.sanitize(product.content),
+                category: DOMPurify.sanitize(product.category),
+            }));
+
             res.json({
                 status: 'success',
-                result: products.length,
-                products: products
+                result: sanitizedProducts.length,
+                products: sanitizedProducts
             })
             
         } catch (err) {

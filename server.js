@@ -10,7 +10,15 @@ const path = require('path')
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors())
+
+const corsOptions = {
+    origin: 'http://localhost:3000', // Allow requests only from this domain
+    credentials: true, // Include cookies and authentication headers in CORS requests
+};
+
+app.use(cors(corsOptions));
+
+
 app.use(fileUpload({
     useTempFiles: true
 }))
